@@ -1,16 +1,17 @@
-const apiKey = '970d587f393eafdffc284a76d86e4d4f'
-let city = document.querySelector('.city');
 
-
-const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
 
 async function weatheApp() {
+    const apiKey = '970d587f393eafdffc284a76d86e4d4f'
+    const city = document.querySelector('.city').value;
 
-    // console.log(city.value)
-    if (city.value === '') {
-        return alert('enter the city')
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${city}&appid=${apiKey}`
+
+    if (city === '') {
+        alert('Please enter a city name');
+        return;
     }
-    city.value = ''
+
 
     try {
 
@@ -23,15 +24,27 @@ async function weatheApp() {
         console.log(data);
 
 
-        const { name, main: { temp, feels_like } } = data;
+        const { name, main: { temp, feels_like, humidity }, wind: { deg, speed }, visibility } = data;
+        console.log(speed.unit)
 
-        alert(`City: ${name}\nTemperature: ${temp}\nFeels Like: ${feels_like}`);
+        document.querySelector('.city-name').textContent = `${name}`
+        document.querySelector('.temperature').textContent = `${((temp) - (273.15)).toFixed(2)} ℃`
+        document.querySelector('.wind').textContent = `: ${speed}`
+        document.querySelector('.weather-content-container').style.display = 'block'
 
-        // Clear the input after successful API call
-        city.value = '';
     } catch (error) {
         console.error('An error occurred:', error);
     }
 }
 
 
+function displayCity() {
+    if (city.value === '') {
+        return alert('enter the city')
+    } else {
+        city.innerHTML = city.value;
+        city.value = ''
+        return;
+    }
+
+}
