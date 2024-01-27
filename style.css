@@ -30,20 +30,24 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin-top: 20px;
 }
 
 input {
     padding: 8px;
     margin-right: 5px;
     margin-top: 20px;
+    font-size: 1rem;
 }
 
 button {
-    padding: 8px;
+    padding: 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
 }
 
 .weather-content-container{
@@ -61,4 +65,12 @@ button {
 }
 .weather-content div{
     margin-left: 45px;
+}
+.error-msg{
+    margin-top: 20px;
+}
+.feels_like {
+    margin-left: -130px;
+    margin-top: 10px;
+   
 }
