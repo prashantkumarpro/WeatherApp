@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,12 +17,18 @@
             <input type="text" class="city">
             <button onclick="getWeather()">get weather</button>
             <div class="weather-content-container">
-                
+                <div>Results for : <span class="city-name">Balia</span> </div>
                 <div class="weather-content">
-                    <div>Results for : <span class="city-name">Balia</span> </div>
-                    <div>Temperature <span class="temperature">18 ℃</span></div>
-                    <div>Wind <span class="wind">11km/h</span></div>
-                    
+                    <div class="weather-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3222/3222800.png" class="clear_sky"
+                            alt="clear_sky" style="display: none;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/4151/4151022.png" class="mist" alt="">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8841/8841410.png" class="rain" alt="">
+                        <img src="https://cdn-icons-png.flaticon.com/512/9309/9309008.png" class="smoke" alt="">
+                    </div>
+                    <div  class="temperature"></div>
+                    <div class="wind"></div>
+
                 </div>
             </div>
             <div class="error-msg"></div>
