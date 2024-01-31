@@ -16,9 +16,13 @@
         <div class="weather-container">
             <input type="text" class="city">
             <button onclick="getWeather()">get weather</button>
+            <h3 class="error-msg"></h3>
             <div class="weather-content-container">
-                <div>Results for : <span class="city-name">Balia</span> </div>
+                <div class="header">
+                    <h3 class="city-name">Balia</h3>
+                </div>
                 <div class="weather-content">
+                    <h3 class="wind"></h3>
                     <div class="weather-icon">
                         <img src="https://cdn-icons-png.flaticon.com/512/3222/3222800.png" class="clear_sky"
                             alt="clear_sky" style="display: none;">
@@ -26,12 +30,12 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/8841/8841410.png" class="rain" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/9309/9309008.png" class="smoke" alt="">
                     </div>
-                    <div  class="temperature"></div>
-                    <div class="wind"></div>
-
+                    <div class="content">
+                        <h3 class="temperature"></h3>
+                    </div>
                 </div>
             </div>
-            <div class="error-msg"></div>
+
         </div>
     </div>
     <script src="app.js"></script>

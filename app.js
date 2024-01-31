@@ -30,7 +30,7 @@ async function getWeather() {
 
 
         document.querySelector('.city-name').textContent = `${name}`
-        document.querySelector('.temperature').textContent = `Temperature: ${((temp) - (273.15)).toFixed(2)} ℃`
+        document.querySelector('.temperature').textContent = `${Math.ceil(((temp) - (273.15)))}℃`
         document.querySelector('.wind').textContent = `Wind:${speed} km/h`
         let weatheContainer = document.querySelector('.weather-content-container');
         let feelsLike = document.createElement('p');
@@ -54,7 +54,7 @@ async function getWeather() {
 
 
     } catch (error) {
-        document.querySelector('.error-msg').textContent = `${error}`
+        document.querySelector('.error-msg').textContent = `An error occurred`
         console.error('An error occurred:', error);
         document.querySelector('.city').value = ''
     }
