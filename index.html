@@ -11,11 +11,12 @@
 
 <body>
     <div class="container">
-        <img src="" alt="">
         <h1>Weather App</h1>
         <div class="weather-container">
+           <div class="search_weather">
             <input type="text" class="city">
-            <button onclick="getWeather()">get weather</button>
+            <button class="search_button" onclick="getWeather()"><i class="ri-search-line"></i></button>
+           </div>
             <h3 class="error-msg"></h3>
             <div class="weather-content-container">
                 <div class="header">
@@ -23,13 +24,14 @@
                 </div>
                 <div class="weather-content">
                     <h3 class="wind"></h3>
-                    <div class="weather-icon">
+                    <figure class="weather-icons">
                         <img src="https://cdn-icons-png.flaticon.com/512/3222/3222800.png" class="clear_sky"
                             alt="clear_sky" style="display: none;">
                         <img src="https://cdn-icons-png.flaticon.com/128/4151/4151022.png" class="mist" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/8841/8841410.png" class="rain" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/9309/9309008.png" class="smoke" alt="">
-                    </div>
+                        <figcaption class="weather_description"></figcaption>
+                    </figure>
                     <div class="content">
                         <h3 class="temperature"></h3>
                     </div>

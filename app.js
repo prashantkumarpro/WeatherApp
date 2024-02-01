@@ -4,7 +4,7 @@ async function getWeather() {
     const apiKey = '970d587f393eafdffc284a76d86e4d4f'
     const city = document.querySelector('.city').value;
 
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${city}&appid=${apiKey}`
 
     if (city === '') {
@@ -24,18 +24,18 @@ async function getWeather() {
         }
         const data = await response.json();
         console.log(data);
-
+     
 
         const { name, main: { temp, feels_like, humidity }, wind: { deg, speed }, visibility, weather } = data;
 
 
         document.querySelector('.city-name').textContent = `${name}`
-        document.querySelector('.temperature').textContent = `${Math.ceil(((temp) - (273.15)))}℃`
-        document.querySelector('.wind').textContent = `Wind:${speed} km/h`
+        document.querySelector('.temperature').textContent = `${temp}℃`
+        document.querySelector('.wind').textContent = `Wind:${speed} m/s`
         let weatheContainer = document.querySelector('.weather-content-container');
         let feelsLike = document.createElement('p');
-        feelsLike.textContent = `Feelslike ${((feels_like) - (273.15)).toFixed(2)} ℃`
-        feelsLike.classList.add('feels_like')
+        feelsLike.textContent = ` ${weather[0].description}`
+        feelsLike.classList.add('weather_description')
         weatheContainer.append(feelsLike);
 
         if (weather[0].main == 'Clear') {
@@ -50,8 +50,6 @@ async function getWeather() {
 
         weatheContainer.style.display = 'block'
         document.querySelector('.city').value = ''
-
-
 
     } catch (error) {
         document.querySelector('.error-msg').textContent = `An error occurred`
