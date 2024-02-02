@@ -30,13 +30,14 @@ async function getWeather() {
 
 
         document.querySelector('.city-name').textContent = `${name}`
-        document.querySelector('.temperature').textContent = `${temp}℃`
+        document.querySelector('.temperature').textContent = `${Math.round(temp)}°`
         document.querySelector('.wind').textContent = `Wind:${speed} m/s`
         let weatheContainer = document.querySelector('.weather-content-container');
+        let weatherIcons = document.querySelector('.weather-icons')
         let feelsLike = document.createElement('p');
         feelsLike.textContent = ` ${weather[0].description}`
         feelsLike.classList.add('weather_description')
-        weatheContainer.append(feelsLike);
+        weatherIcons.append(feelsLike);
 
         if (weather[0].main == 'Clear') {
             document.querySelector('.clear_sky').style.display = 'block'

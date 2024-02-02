@@ -13,28 +13,33 @@
     <div class="container">
         <h1>Weather App</h1>
         <div class="weather-container">
-           <div class="search_weather">
-            <input type="text" class="city">
-            <button class="search_button" onclick="getWeather()"><i class="ri-search-line"></i></button>
-           </div>
+            <div class="search_weather">
+                <input type="text" class="city" placeholder="Enter city neme...">
+                <button class="search_button" onclick="getWeather()"><i class="ri-search-line"></i></button>
+            </div>
             <h3 class="error-msg"></h3>
             <div class="weather-content-container">
                 <div class="header">
-                    <h3 class="city-name">Balia</h3>
+                    <h6 class="city-name">Bhagalpur</h6>
                 </div>
                 <div class="weather-content">
-                    <h3 class="wind"></h3>
-                    <figure class="weather-icons">
+                    <div class="weather-icons">
                         <img src="https://cdn-icons-png.flaticon.com/512/3222/3222800.png" class="clear_sky"
-                            alt="clear_sky" style="display: none;">
+                            alt="clear_sky">
                         <img src="https://cdn-icons-png.flaticon.com/128/4151/4151022.png" class="mist" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/8841/8841410.png" class="rain" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/9309/9309008.png" class="smoke" alt="">
-                        <figcaption class="weather_description"></figcaption>
-                    </figure>
-                    <div class="content">
-                        <h3 class="temperature"></h3>
+                        <!-- <p class="weather_description">clear sky</p> -->
                     </div>
+                    <div class="temperature-con">
+                        <span class="temperature"></span>
+                        <span class="temperature-symbol">C</span>
+                    </div>
+                    <div class="content">
+                        <p class="wind">Wind: 2 m/s</p>
+                    </div>
+
+
                 </div>
             </div>
 
