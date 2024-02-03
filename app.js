@@ -5,7 +5,7 @@ async function getWeather() {
     const city = document.querySelector('.city').value;
 
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${city}&appid=${apiKey}`
+
 
     if (city === '') {
         alert('Please enter a city name');
@@ -14,7 +14,7 @@ async function getWeather() {
 
 
     try {
-        console.log('Loading ...')
+        showLoadingMsg(); // Show loading message
         const response = await fetch(apiUrl);
         if (!response.ok) {
             console.log(`Error ${response.status} - ${response.statusText}`)
@@ -24,20 +24,32 @@ async function getWeather() {
         }
         const data = await response.json();
         console.log(data);
-     
 
-        const { name, main: { temp, feels_like, humidity }, wind: { deg, speed }, visibility, weather } = data;
+
+        const {
+            name,
+            main: {
+                temp,
+                feels_like,
+                humidity,
+                pressure
+            },
+            wind: {
+                deg,
+                speed
+            },
+            visibility,
+            weather,
+        } = data;
 
 
         document.querySelector('.city-name').textContent = `${name}`
         document.querySelector('.temperature').textContent = `${Math.round(temp)}°`
-        document.querySelector('.wind').textContent = `Wind:${speed} m/s`
+        document.querySelector('.wind').textContent = `Wind ${speed} m/s`
         let weatheContainer = document.querySelector('.weather-content-container');
-        let figure = document.querySelector('.weather-icons')
-        let feelsLike = document.createElement('figcaption');
+        let feelsLike = document.querySelector('.weather_description');
         feelsLike.textContent = ` ${weather[0].description}`
-        feelsLike.classList.add('weather_description')
-        figure.append(feelsLike);
+
 
         if (weather[0].main == 'Clear') {
             document.querySelector('.clear_sky').style.display = 'block'
@@ -56,9 +68,16 @@ async function getWeather() {
         document.querySelector('.error-msg').textContent = `An error occurred`
         console.error('An error occurred:', error);
         document.querySelector('.city').value = ''
+    } finally {
+        hideLoadingMsg(); // Hide loading message regardless of success or failure
     }
 }
 
-
+function showLoadingMsg() {
+    document.querySelector('.loading_msg').style.display = 'block'
+}
+function hideLoadingMsg() {
+    document.querySelector('.loading_msg').style.display = 'none'
+}
 
 

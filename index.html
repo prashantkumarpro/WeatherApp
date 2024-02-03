@@ -18,6 +18,7 @@
                 <button class="search_button" onclick="getWeather()"><i class="ri-search-line"></i></button>
             </div>
             <h3 class="error-msg"></h3>
+            <h3 class="loading_msg">Loading...</h3>
             <div class="weather-content-container">
                 <div class="header">
                     <h6 class="city-name">Bhagalpur</h6>
@@ -29,6 +30,7 @@
                         <img src="https://cdn-icons-png.flaticon.com/128/4151/4151022.png" class="mist" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/8841/8841410.png" class="rain" alt="">
                         <img src="https://cdn-icons-png.flaticon.com/512/9309/9309008.png" class="smoke" alt="">
+                        <figcaption class="weather_description"></figcaption>
                     </figure>
                     <div class="temperature-con">
                         <span class="temperature"></span>
@@ -36,7 +38,15 @@
                     </div>
                 </div>
                 <div class="content">
-                    <p class="wind">Wind: 2 m/s</p>
+                    <div class="contetn part">
+                        <p class="wind">Wind 2m/s</p>
+                        <p class="humidity">humidity 42</p>
+                    </div>
+                    <div class="content part">
+                        <p class="visibility">visibility 10000</p>
+                        <p class="pressure">pressure 1016</p>
+                    </div>
+
                 </div>
             </div>
 

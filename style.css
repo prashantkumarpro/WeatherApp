@@ -115,8 +115,9 @@ input {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-bottom: 20px;
 }
 
 .weather-content .temperature {
@@ -125,27 +126,43 @@ input {
 }
 
 .weather-content .temperature-symbol {
-    font-size: 2.8rem;
+    font-size: 2rem;
     text-transform: uppercase;
     text-align: center;
 }
-.weather-content .content p {
+
+/* .content{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+} */
+.content .part{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+    font-size: 0.84rem;
+}
+
+/* .weather-content .content p {
     font-size: 0.94rem;
     text-align: center;
-}
+} */
 
 
 
 
 .error-msg {
     margin-top: 5px;
-    /* margin: 0 auto; */
     color: #fff;
     font-weight: 200;
     text-align: center;
     font-size: 0.80rem;
 }
-
+.loading_msg{
+    display: none;
+}
 
 .clear_sky {
     display: none;
