@@ -14,7 +14,7 @@ async function getWeather() {
 
 
     try {
-
+        console.log('Loading ...')
         const response = await fetch(apiUrl);
         if (!response.ok) {
             console.log(`Error ${response.status} - ${response.statusText}`)
@@ -33,11 +33,11 @@ async function getWeather() {
         document.querySelector('.temperature').textContent = `${Math.round(temp)}°`
         document.querySelector('.wind').textContent = `Wind:${speed} m/s`
         let weatheContainer = document.querySelector('.weather-content-container');
-        let weatherIcons = document.querySelector('.weather-icons')
-        let feelsLike = document.createElement('p');
+        let figure = document.querySelector('.weather-icons')
+        let feelsLike = document.createElement('figcaption');
         feelsLike.textContent = ` ${weather[0].description}`
         feelsLike.classList.add('weather_description')
-        weatherIcons.append(feelsLike);
+        figure.append(feelsLike);
 
         if (weather[0].main == 'Clear') {
             document.querySelector('.clear_sky').style.display = 'block'
@@ -60,14 +60,5 @@ async function getWeather() {
 }
 
 
-// function displayCity() {
-//     if (city.value === '') {
-//         return alert('enter the city')
-//     } else {
-//         city.innerHTML = city.value;
-//         city.value = ''
-//         return;
-//     }
 
-// }
 
