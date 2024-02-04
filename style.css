@@ -137,7 +137,7 @@ input {
     flex-direction: row;
     justify-content: space-evenly;
 } */
-.content .part{
+.content .part {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -160,33 +160,26 @@ input {
     text-align: center;
     font-size: 0.80rem;
 }
-.loading_msg{
+
+.loading_msg {
     display: none;
 }
 
-.clear_sky {
-    display: none;
-    max-height: 72px;
-}
-
-.mist {
-    display: none;
-    max-height: 72px;
-}
-
-.rain {
-    display: none;
-    max-height: 72px;
-    color: #FFE168;
-}
-
-.smoke {
+.clear,
+.mist,
+.rain,
+.smoke,
+.clouds,
+.drizzle,
+.snow,
+.thunderstorm,
+.haze {
     display: none;
     max-height: 72px;
-    color: #FFE168;
 }
 
- .weather_description {
+
+.weather_description {
     color: #fff;
     font-size: 0.84rem;
     margin-top: 4px;
