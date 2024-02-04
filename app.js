@@ -14,6 +14,7 @@ async function getWeather() {
 
 
     try {
+
         showLoadingMsg(); // Show loading message
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -22,6 +23,7 @@ async function getWeather() {
             document.querySelector('.city').value = ''
             return;
         }
+
         const data = await response.json();
         console.log(data);
 
@@ -30,7 +32,6 @@ async function getWeather() {
             name,
             main: {
                 temp,
-                feels_like,
                 humidity,
                 pressure
             },
@@ -42,23 +43,36 @@ async function getWeather() {
             weather,
         } = data;
 
+        let weatheContainer = document.querySelector('.weather-content-container');
 
         document.querySelector('.city-name').textContent = `${name}`
         document.querySelector('.temperature').textContent = `${Math.round(temp)}°`
+        document.querySelector('.weather_description').textContent = ` ${weather[0].description}`;
         document.querySelector('.wind').textContent = `Wind ${speed} m/s`
-        let weatheContainer = document.querySelector('.weather-content-container');
-        let feelsLike = document.querySelector('.weather_description');
-        feelsLike.textContent = ` ${weather[0].description}`
+        document.querySelector('.humidity').textContent = `Humidity ${humidity} %`
+        document.querySelector('.visibility').textContent = `Visibility ${visibility} meter`
+        document.querySelector('.pressure').textContent = `Pressure${pressure} hPa`
+
 
 
         if (weather[0].main == 'Clear') {
-            document.querySelector('.clear_sky').style.display = 'block'
+            document.querySelector('.clear').style.display = 'block'
         } else if (weather[0].main == 'Mist') {
             document.querySelector('.mist').style.display = 'block'
         } else if (weather[0].main == 'Rain') {
             document.querySelector('.rain').style.display = 'block'
         } else if (weather[0].main == 'Smoke') {
             document.querySelector('.smoke').style.display = 'block'
+        } else if (weather[0].main == 'Clouds') {
+            document.querySelector('.clouds').style.display = 'block'
+        } else if (weather[0].main == 'Haze') {
+            document.querySelector('.haze').style.display = 'block'
+        } else if (weather[0].main == 'Drizzle') {
+            document.querySelector('.drizzle').style.display = 'block'
+        } else if (weather[0].main == 'Snow') {
+            document.querySelector('.snow').style.display = 'block'
+        } else if (weather[0].main == 'Thunderstorm') {
+            document.querySelector('.thunderstorm').style.display = 'block'
         }
 
         weatheContainer.style.display = 'block'
@@ -73,9 +87,11 @@ async function getWeather() {
     }
 }
 
+
 function showLoadingMsg() {
     document.querySelector('.loading_msg').style.display = 'block'
 }
+
 function hideLoadingMsg() {
     document.querySelector('.loading_msg').style.display = 'none'
 }
