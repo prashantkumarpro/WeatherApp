@@ -21,7 +21,7 @@ body {
 
     /* The image used */
 
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGUOiaQrpYByGVr13fYRiL47vNZYhBlzVw7w&usqp=CAU");
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/007/252/050/small/4k-hd-wallpaper-for-computer-desktop-with-dark-aesthetic-and-dope-trippy-wallpapers-for-cute-girls-photo.jpg");
     /* Full height */
     min-height: 100vh;
     /* Center and scale the image nicely */
@@ -48,6 +48,13 @@ body {
     border-radius: 8px;
     padding: 20px;
     margin-top: 20px;
+    background-image: url("https://c4.wallpaperflare.com/wallpaper/761/613/75/abstract-sky-sun-clouds-wallpaper-thumb.jpg");
+    /* Full height */
+    min-height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .search_weather {
@@ -88,6 +95,7 @@ input {
     margin-top: 20px;
     display: none;
     color: #fff;
+ 
 }
 
 .weather-content-container .header {

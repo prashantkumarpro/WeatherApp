@@ -1,17 +1,14 @@
 
 
 async function getWeather() {
-    const apiKey = '970d587f393eafdffc284a76d86e4d4f'
+    const apiKey = 'c4b687fe2aa8b63d72b92d97600d2c27'
     const city = document.querySelector('.city').value;
 
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-
-
     if (city === '') {
         alert('Please enter a city name');
         return;
-    }
-
+    } 
 
     try {
 
@@ -27,55 +24,10 @@ async function getWeather() {
         const data = await response.json();
         console.log(data);
 
+        // Update weather information based on the response data
+        updateWeatherInformation(data);
 
-        const {
-            name,
-            main: {
-                temp,
-                humidity,
-                pressure
-            },
-            wind: {
-                deg,
-                speed
-            },
-            visibility,
-            weather,
-        } = data;
-
-        let weatheContainer = document.querySelector('.weather-content-container');
-
-        document.querySelector('.city-name').textContent = `${name}`
-        document.querySelector('.temperature').textContent = `${Math.round(temp)}°`
-        document.querySelector('.weather_description').textContent = ` ${weather[0].description}`;
-        document.querySelector('.wind').textContent = `Wind ${speed} m/s`
-        document.querySelector('.humidity').textContent = `Humidity ${humidity} %`
-        document.querySelector('.visibility').textContent = `Visibility ${visibility} meter`
-        document.querySelector('.pressure').textContent = `Pressure${pressure} hPa`
-
-
-
-        if (weather[0].main == 'Clear') {
-            document.querySelector('.clear').style.display = 'block'
-        } else if (weather[0].main == 'Mist') {
-            document.querySelector('.mist').style.display = 'block'
-        } else if (weather[0].main == 'Rain') {
-            document.querySelector('.rain').style.display = 'block'
-        } else if (weather[0].main == 'Smoke') {
-            document.querySelector('.smoke').style.display = 'block'
-        } else if (weather[0].main == 'Clouds') {
-            document.querySelector('.clouds').style.display = 'block'
-        } else if (weather[0].main == 'Haze') {
-            document.querySelector('.haze').style.display = 'block'
-        } else if (weather[0].main == 'Drizzle') {
-            document.querySelector('.drizzle').style.display = 'block'
-        } else if (weather[0].main == 'Snow') {
-            document.querySelector('.snow').style.display = 'block'
-        } else if (weather[0].main == 'Thunderstorm') {
-            document.querySelector('.thunderstorm').style.display = 'block'
-        }
-
-        weatheContainer.style.display = 'block'
+        // Clear city input field after fetching data
         document.querySelector('.city').value = ''
 
     } catch (error) {
@@ -87,6 +39,52 @@ async function getWeather() {
     }
 }
 
+function updateWeatherInformation(data) {
+    const {
+        name,
+        main: {
+            temp,
+            humidity,
+            pressure
+        },
+        wind: {
+            deg,
+            speed
+        },
+        visibility,
+        weather,
+    } = data;
+
+    let weatherContainer = document.querySelector('.weather-content-container');
+    document.querySelector('.city-name').textContent = `${name}`;
+    document.querySelector('.temperature').textContent = `${Math.round(temp)}°`;
+    document.querySelector('.weather_description').textContent = ` ${weather[0].description}`;
+    document.querySelector('.wind').textContent = `Wind ${speed} m/s`;
+    document.querySelector('.humidity').textContent = `Humidity ${humidity} %`;
+    document.querySelector('.visibility').textContent = `Visibility ${visibility} meter`;
+    document.querySelector('.pressure').textContent = `Pressure${pressure} hPa`;
+
+
+
+
+    // get weather icons 
+    const weatherIcons = document.querySelector('.weather-icons').children;
+
+    // Convert HTMLCollection to array using Array.from()
+    const arr = Array.from(weatherIcons)
+    arr.forEach((icon) => {
+
+        // Show the appropriate weather condition image
+        if (weather[0].main.toLowerCase() === icon.className) {
+            icon.style.display = 'block'
+        } else {
+            // Hide all weather condition images
+            icon.style.display = 'none'
+        }
+    })
+
+    weatherContainer.style.display = 'block';
+}
 
 function showLoadingMsg() {
     document.querySelector('.loading_msg').style.display = 'block'
