@@ -4,7 +4,7 @@ async function getWeather() {
     const apiKey = 'c4b687fe2aa8b63d72b92d97600d2c27'
     const city = document.querySelector('.city').value;
 
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
     if (city === '') {
         alert('Please enter a city name');
         return;
@@ -41,18 +41,16 @@ async function getWeather() {
 
 function updateWeatherInformation(data) {
     const {
-        name,
-        main: {
-            temp,
-            humidity,
-            pressure
-        },
-        wind: {
-            deg,
-            speed
-        },
+       city:{name},
+
+       list:[
+        {main:{feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_kf, temp_max,temp_min},
+        wind: { deg, speed},
         visibility,
-        weather,
+        weather,}
+       ],
+       
+       
     } = data;
 
     let weatherContainer = document.querySelector('.weather-content-container');
@@ -94,4 +92,25 @@ function hideLoadingMsg() {
     document.querySelector('.loading_msg').style.display = 'none'
 }
 
+// const apiKey = 'c4b687fe2aa8b63d72b92d97600d2c27'
+// const cityName = "Bhagalpur"
 
+
+
+    
+    // Fetch the 5-day forecast data
+    // fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`)
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         console.log(data.list[0].dt);
+    //         // Process the data here, such as extracting daily forecasts
+    //     })
+    //     .catch(error => {
+    //         console.error('There was a problem with your fetch operation:', error);
+    //     });
+    
