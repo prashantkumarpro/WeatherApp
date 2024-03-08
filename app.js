@@ -8,7 +8,7 @@ async function getWeather() {
     if (city === '') {
         alert('Please enter a city name');
         return;
-    } 
+    }
 
     try {
 
@@ -22,7 +22,27 @@ async function getWeather() {
         }
 
         const data = await response.json();
-        console.log(data);
+
+        // Get the list of forecast data
+        const forecastList = data.list;
+        console.log(forecastList)
+        // Get the current date and time
+        const currentTime = new Date();
+        console.log("Current Time:", currentTime); // Log the current time
+
+        // Find the forecast for the current time
+        const currentForecast = forecastList.find(forecast => {
+            // Convert forecast timestamp to Date object
+            const forecastTime = new Date(forecast.dt * 1000); // Convert from seconds to milliseconds
+            console.log("Forecast Time:", forecastTime); // Log the forecast time
+
+            // Check if forecast time is close to current time (within a certain threshold, e.g., 1 hour)
+            return Math.abs(forecastTime - currentTime) <= (1 * 60 * 60 * 1000); // 1 hour threshold
+        });
+
+        // Print the forecast for the current time
+        console.log("Forecast for current time:", currentForecast);
+
 
         // Update weather information based on the response data
         updateWeatherInformation(data);
@@ -41,16 +61,16 @@ async function getWeather() {
 
 function updateWeatherInformation(data) {
     const {
-       city:{name},
+        city: { name },
 
-       list:[
-        {main:{feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_kf, temp_max,temp_min},
-        wind: { deg, speed},
-        visibility,
-        weather,}
-       ],
-       
-       
+        list: [
+            { main: { feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_min },
+                wind: { deg, speed },
+                visibility,
+                weather, }
+        ],
+
+
     } = data;
 
     let weatherContainer = document.querySelector('.weather-content-container');
@@ -92,25 +112,94 @@ function hideLoadingMsg() {
     document.querySelector('.loading_msg').style.display = 'none'
 }
 
-// const apiKey = 'c4b687fe2aa8b63d72b92d97600d2c27'
-// const cityName = "Bhagalpur"
+
+// Fetch the 5-day forecast data
+// fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`)
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         console.log(data.list[0].dt);
+//         // Process the data here, such as extracting daily forecasts
+//     })
+//     .catch(error => {
+//         console.error('There was a problem with your fetch operation:', error);
+//     });
+
+
+// const apiKeys = 'c4b687fe2aa8b63d72b92d97600d2c27'
+// const cityName = "Purnia"
+
+// // Construct the API URL
+// const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKeys}`;
+
+// // Make the API call using fetch
+// fetch(apiUrl)
+//   .then(response => response.json())
+//   .then(data => {
+
+//   })
+//   .catch(error => {
+//     console.error('Error fetching forecast:', error);
+//   });
+
+const now = new Date()
+
+// get the month name
+const monthNames = ["January", "February", "Mar", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+const month = monthNames[now.getMonth()]
+// console.log(month)
+
+// get the day name 
+const dayName = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+const day = dayName[now.getDay()]
+//  console.log(day)
+
+// get the date num
+let date = now.getDate()
+if (date < 10) {
+    date = "0" + date
+    //    console.log(  date)
+}
+//  console.log(date)
+
+
+// get the hour
+let hours = now.getHours()
+hours = hours < 10 ? '0' + hours : hours;
+// hours = hours >  12 ? (12-hours) : hours;
+
+
+let minutes = now.getMinutes()
+minutes = minutes < 10 ? '0' + minutes : minutes;
+
+let seconds = now.getSeconds()
+seconds = seconds < 10 ? '0' + seconds : seconds;
+
+
+let time = `${hours}:${minutes}:${seconds}`
+
+let interVal = setInterval(() => {
+    seconds++
+    document.querySelector('.hours').innerHTML =` ${hours} :`;
+    document.querySelector('.minutes').innerHTML = `${minutes} :`
+
+    document.querySelector('.seconds').innerHTML = seconds;
+
+}, 1000)
 
 
 
-    
-    // Fetch the 5-day forecast data
-    // fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`)
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log(data.list[0].dt);
-    //         // Process the data here, such as extracting daily forecasts
-    //     })
-    //     .catch(error => {
-    //         console.error('There was a problem with your fetch operation:', error);
-    //     });
-    
+let myDate = `${day}, ${month} ${date}`
+// console.log(myDate)
+
+
+
+document.querySelector('#date').innerHTML = myDate
+// console.log(now.toDateString())
