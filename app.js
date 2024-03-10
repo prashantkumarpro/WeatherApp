@@ -157,9 +157,10 @@ const month = monthNames[now.getMonth()]
 // console.log(month)
 
 // get the day name 
-const dayName = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
-const day = dayName[now.getDay()]
-//  console.log(day)
+const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+const day = dayNames[now.getDay()]
+// console.log(day)
+
 
 // get the date num
 let date = now.getDate()
@@ -168,38 +169,36 @@ if (date < 10) {
     //    console.log(  date)
 }
 //  console.log(date)
-
-
-// get the hour
-let hours = now.getHours()
-hours = hours < 10 ? '0' + hours : hours;
-// hours = hours >  12 ? (12-hours) : hours;
-
-
-let minutes = now.getMinutes()
-minutes = minutes < 10 ? '0' + minutes : minutes;
-
-let seconds = now.getSeconds()
-seconds = seconds < 10 ? '0' + seconds : seconds;
-
-
-let time = `${hours}:${minutes}:${seconds}`
-
-let interVal = setInterval(() => {
-    seconds++
-    document.querySelector('.hours').innerHTML =` ${hours} :`;
-    document.querySelector('.minutes').innerHTML = `${minutes} :`
-
-    document.querySelector('.seconds').innerHTML = seconds;
-
-}, 1000)
-
-
-
-let myDate = `${day}, ${month} ${date}`
-// console.log(myDate)
-
-
-
+let myDate = `${day}: ${month} ${date}`
+console.log(myDate)
 document.querySelector('#date').innerHTML = myDate
+let obj = [{dayNames: dayNames[dayNames], monthNames:monthNames[now.getMonth()], date: date} ];
+
+
+
+
+
+
+
+
+function updateTime() {
+    // get the hour
+    let hours = now.getHours().toString().padStart(2, '0');
+
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    
+
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+
+    let timeNow = `${hours}:${minutes}:${seconds}`
+    document.querySelector('.time').innerHTML = timeNow;
+}
+
+
+let interval = setInterval(updateTime, 1000)
+
+
+
+
+
 // console.log(now.toDateString())
