@@ -28,13 +28,13 @@ async function getWeather() {
         console.log(forecastList)
         // Get the current date and time
         const currentTime = new Date();
-        console.log("Current Time:", currentTime); // Log the current time
+        // console.log("Current Time:", currentTime); // Log the current time
 
         // Find the forecast for the current time
         const currentForecast = forecastList.find(forecast => {
             // Convert forecast timestamp to Date object
             const forecastTime = new Date(forecast.dt * 1000); // Convert from seconds to milliseconds
-            console.log("Forecast Time:", forecastTime); // Log the forecast time
+            // console.log("Forecast Time:", forecastTime); // Log the forecast time
 
             // Check if forecast time is close to current time (within a certain threshold, e.g., 1 hour)
             return Math.abs(forecastTime - currentTime) <= (1 * 60 * 60 * 1000); // 1 hour threshold
@@ -60,6 +60,7 @@ async function getWeather() {
 }
 
 function updateWeatherInformation(data) {
+
     const {
         city: { name },
 
@@ -67,11 +68,28 @@ function updateWeatherInformation(data) {
             { main: { feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_min },
                 wind: { deg, speed },
                 visibility,
-                weather, }
+                weather,
+            }
         ],
 
 
     } = data;
+
+    const forecasts = data.list.filter((forecast, index) => index % 8 === 0);
+    let clutter = ''
+    forecasts.forEach((forecast, index) => {
+        let forecastTime = new Date((forecast.dt * 1000)+1)
+        let formatedForecastTime = forecastTime.toLocaleDateString('en-Us', { weekday: "short",day: 'numeric', month: 'short',  })
+       
+        clutter += `<div class="dat-list">
+                        <h4 id="date">${formatedForecastTime}</h4>
+                    </div>`
+    })
+    document.querySelector('.forecast').innerHTML = clutter;
+
+
+
+
 
     let weatherContainer = document.querySelector('.weather-content-container');
     document.querySelector('.city-name').textContent = `${name}`;
@@ -150,8 +168,7 @@ const now = new Date()
 
 // get the month name
 const monthNames = ["January", "February", "Mar", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+    "July", "August", "September", "October", "November", "December"];
 
 const month = monthNames[now.getMonth()]
 // console.log(month)
@@ -169,10 +186,14 @@ if (date < 10) {
     //    console.log(  date)
 }
 //  console.log(date)
-let myDate = `${day}: ${month} ${date}`
+let myDate = `${day},${month}${date}`
 console.log(myDate)
-document.querySelector('#date').innerHTML = myDate
-let obj = [{dayNames: dayNames[dayNames], monthNames:monthNames[now.getMonth()], date: date} ];
+// document.querySelector('#date').innerHTML = myDate
+
+const tomorrow = new Date()
+tomorrow.setDate(tomorrow.getDate() + 1)
+let formatedDate = tomorrow.toLocaleDateString('en-Us', { weekday: "long", month: 'short', day: 'numeric', year: 'numeric' })
+console.log('tomorrow', formatedDate)
 
 
 
@@ -186,7 +207,6 @@ function updateTime() {
     let hours = now.getHours().toString().padStart(2, '0');
 
     let minutes = now.getMinutes().toString().padStart(2, '0');
-    
 
     let seconds = now.getSeconds().toString().padStart(2, '0');
 
