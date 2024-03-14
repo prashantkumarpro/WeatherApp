@@ -41,7 +41,7 @@ async function getWeather() {
         });
 
         // Print the forecast for the current time
-        console.log("Forecast for current time:", currentForecast);
+        // console.log("Forecast for current time:", currentForecast);
 
 
         // Update weather information based on the response data
@@ -78,15 +78,30 @@ function updateWeatherInformation(data) {
     const forecasts = data.list.filter((forecast, index) => index % 8 === 0);
     let clutter = ''
     forecasts.forEach((forecast, index) => {
-        let forecastTime = new Date((forecast.dt * 1000)+1)
-        let formatedForecastTime = forecastTime.toLocaleDateString('en-Us', { weekday: "short",day: 'numeric', month: 'short',  })
-       
-        clutter += `<div class="dat-list">
-                        <h4 id="date">${formatedForecastTime}</h4>
-                    </div>`
-    })
-    document.querySelector('.forecast').innerHTML = clutter;
+        let forecastTime = new Date((forecast.dt * 1000) + 1)
+        let formatedForecastTime = forecastTime.toLocaleDateString('en-Us', { weekday: "short", day: 'numeric', month: 'short', })
 
+        console.log(forecast.main.temp)
+        clutter += `<div class="dat-list" id="${index}">
+                        
+                        <h4 id="date">${formatedForecastTime}<span> Max Temp:${Math.round(forecast.main.temp_max
+        )}℃</span></h4>  
+                    </div>`
+
+
+
+    })
+   let foreCastDate =  document.querySelector('.forecast')
+   foreCastDate.innerHTML = clutter;
+   console.log(foreCastDate.children)
+
+  Array.from(foreCastDate.children).forEach((element)=>{
+        element.addEventListener('click', ()=>{
+           let p = document.createElement('p');
+           p.innerHTML = `${temp}`
+           foreCastDate.appendChild(p)
+        })
+   })
 
 
 
@@ -131,38 +146,6 @@ function hideLoadingMsg() {
 }
 
 
-// Fetch the 5-day forecast data
-// fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`)
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log(data.list[0].dt);
-//         // Process the data here, such as extracting daily forecasts
-//     })
-//     .catch(error => {
-//         console.error('There was a problem with your fetch operation:', error);
-//     });
-
-
-// const apiKeys = 'c4b687fe2aa8b63d72b92d97600d2c27'
-// const cityName = "Purnia"
-
-// // Construct the API URL
-// const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKeys}`;
-
-// // Make the API call using fetch
-// fetch(apiUrl)
-//   .then(response => response.json())
-//   .then(data => {
-
-//   })
-//   .catch(error => {
-//     console.error('Error fetching forecast:', error);
-//   });
 
 const now = new Date()
 
@@ -193,12 +176,6 @@ console.log(myDate)
 const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1)
 let formatedDate = tomorrow.toLocaleDateString('en-Us', { weekday: "long", month: 'short', day: 'numeric', year: 'numeric' })
-console.log('tomorrow', formatedDate)
-
-
-
-
-
 
 
 
@@ -213,8 +190,6 @@ function updateTime() {
     let timeNow = `${hours}:${minutes}:${seconds}`
     document.querySelector('.time').innerHTML = timeNow;
 }
-
-
 let interval = setInterval(updateTime, 1000)
 
 
