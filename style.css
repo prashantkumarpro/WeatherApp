@@ -185,10 +185,46 @@ input {
     display: none;
     max-height: 72px;
 }
-
-
 .weather_description {
     color: #fff;
     font-size: 0.84rem;
     margin-top: 4px;
+}
+.forecasts{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.forecasts-list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.forecast{
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    margin: 10px 10px 10px;
+    border-bottom: 1.5px solid #050505;
+    padding: 3px 0;
+}
+.forecast p{
+  font-size: 10px;
+  color: #333;;
+}
+.daily-forecast-icon{
+    width: 45px;
+    height: 45px;
+
+}
+.time{
+    color: #333;
+    font-size: 14px;
+}
+#date{
+    color: #333;
+    font-size: 14px;
 }

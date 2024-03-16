@@ -25,7 +25,7 @@ async function getWeather() {
 
         // Get the list of forecast data
         const forecastList = data.list;
-        console.log(forecastList)
+        // console.log(forecastList)
         // Get the current date and time
         const currentTime = new Date();
         // console.log("Current Time:", currentTime); // Log the current time
@@ -81,27 +81,31 @@ function updateWeatherInformation(data) {
         let forecastTime = new Date((forecast.dt * 1000) + 1)
         let formatedForecastTime = forecastTime.toLocaleDateString('en-Us', { weekday: "short", day: 'numeric', month: 'short', })
 
-        console.log(forecast.main.temp)
-        clutter += `<div class="dat-list" id="${index}">
-                        
-                        <h4 id="date">${formatedForecastTime}<span> Max Temp:${Math.round(forecast.main.temp_max
-        )}℃</span></h4>  
-                    </div>`
+        console.log(forecast)
+        clutter += `<div class="forecasts-list">
+                        <div class="dat-list forecast" id="${index}">
+                             <h4 id="date">(${formatedForecastTime})</h4>
+                             <img class='daily-forecast-icon' src='https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png' />
+                            <p> Max Temp:${Math.round(forecast.main.temp_max)}℃</p>
+                             <p>Min Temp:${Math.round(forecast.main.temp_min)}℃</p>
+                         </div>
+                     </div>`
+
 
 
 
     })
-   let foreCastDate =  document.querySelector('.forecast')
-   foreCastDate.innerHTML = clutter;
-   console.log(foreCastDate.children)
+    let foreCastDate = document.querySelector('.forecasts')
+    foreCastDate.innerHTML = clutter;
+    //    console.log(foreCastDate.children)
 
-  Array.from(foreCastDate.children).forEach((element)=>{
-        element.addEventListener('click', ()=>{
-           let p = document.createElement('p');
-           p.innerHTML = `${temp}`
-           foreCastDate.appendChild(p)
+    Array.from(foreCastDate.children).forEach((element) => {
+        element.addEventListener('click', () => {
+            let p = document.createElement('p');
+
+            foreCastDate.appendChild(p)
         })
-   })
+    })
 
 
 
